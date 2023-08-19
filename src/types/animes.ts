@@ -1,8 +1,22 @@
-export interface Anime {
-  data: Data;
+export default interface Animes {
+  pagination: Pagination;
+  data: Daum[];
 }
 
-export interface Data {
+interface Pagination {
+  last_visible_page: number;
+  has_next_page: boolean;
+  current_page: number;
+  items: Items;
+}
+
+interface Items {
+  count: number;
+  total: number;
+  per_page: number;
+}
+
+interface Daum {
   mal_id: number;
   url: string;
   images: Images;
@@ -10,30 +24,30 @@ export interface Data {
   approved: boolean;
   titles: Title[];
   title: string;
-  title_english: string;
-  title_japanese: string;
+  title_english?: string;
+  title_japanese?: string;
   title_synonyms: string[];
-  type: string;
+  type?: string;
   source: string;
-  episodes: number;
+  episodes?: number;
   status: string;
   airing: boolean;
   aired: Aired;
   duration: string;
-  rating: string;
-  score: number;
-  scored_by: number;
-  rank: number;
+  rating?: string;
+  score: any;
+  scored_by: any;
+  rank: any;
   popularity: number;
   members: number;
   favorites: number;
-  synopsis: string;
+  synopsis?: string;
   background: any;
-  season: string;
-  year: number;
+  season: any;
+  year: any;
   broadcast: Broadcast;
   producers: Producer[];
-  licensors: Licensor[];
+  licensors: any[];
   studios: Studio[];
   genres: Genre[];
   explicit_genres: any[];
@@ -41,110 +55,103 @@ export interface Data {
   demographics: Demographic[];
 }
 
-export interface Images {
+interface Images {
   jpg: Jpg;
   webp: Webp;
 }
 
-export interface Jpg {
+interface Jpg {
   image_url: string;
   small_image_url: string;
   large_image_url: string;
 }
 
-export interface Webp {
+interface Webp {
   image_url: string;
   small_image_url: string;
   large_image_url: string;
 }
 
-export interface Trailer {
-  youtube_id: string;
-  url: string;
-  embed_url: string;
+interface Trailer {
+  youtube_id?: string;
+  url?: string;
+  embed_url?: string;
   images: Images2;
 }
 
-export interface Images2 {
-  image_url: string;
-  small_image_url: string;
-  medium_image_url: string;
-  large_image_url: string;
-  maximum_image_url: string;
+interface Images2 {
+  image_url?: string;
+  small_image_url?: string;
+  medium_image_url?: string;
+  large_image_url?: string;
+  maximum_image_url?: string;
 }
 
-export interface Title {
+interface Title {
   type: string;
   title: string;
 }
 
-export interface Aired {
-  from: string;
-  to: string;
+interface Aired {
+  from?: string;
+  to: any;
   prop: Prop;
   string: string;
 }
 
-export interface Prop {
+interface Prop {
   from: From;
   to: To;
 }
 
-export interface From {
-  day: number;
-  month: number;
-  year: number;
+interface From {
+  day?: number;
+  month?: number;
+  year?: number;
 }
 
-export interface To {
-  day: number;
-  month: number;
-  year: number;
+interface To {
+  day: any;
+  month: any;
+  year: any;
 }
 
-export interface Broadcast {
+interface Broadcast {
   day: any;
   time: any;
   timezone: any;
-  string: string;
+  string?: string;
 }
 
-export interface Producer {
+interface Producer {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-export interface Licensor {
+interface Studio {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-export interface Studio {
+interface Genre {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-export interface Genre {
+interface Theme {
   mal_id: number;
   type: string;
   name: string;
   url: string;
 }
 
-export interface Theme {
-  mal_id: number;
-  type: string;
-  name: string;
-  url: string;
-}
-
-export interface Demographic {
+interface Demographic {
   mal_id: number;
   type: string;
   name: string;

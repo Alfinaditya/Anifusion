@@ -1,4 +1,4 @@
-import { Anime } from '@/types/anime';
+import Animes from '@/types/animes';
 import Image from 'next/image';
 import React from 'react';
 async function getData() {
@@ -17,7 +17,7 @@ async function getData() {
 }
 
 const CompletedAnime = async () => {
-  const completedAnime: Anime = await getData();
+  const completedAnime: Animes = await getData();
 
   if (!completedAnime.data) {
     return <>Nothing</>;

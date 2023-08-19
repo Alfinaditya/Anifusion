@@ -1,41 +1,43 @@
-import { Anime } from '@/types/anime';
+import Animes from '@/types/animes';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import SortOptions from './SortOptions';
-import { z } from 'zod';
 import Paginate from './Paginate';
+import Search from './Search';
+import Link from 'next/link';
+import { StarIcon } from '@/icons';
+import Navbar from '../partials/Navbar';
 
 export interface Params {
-  status: string;
-  type: string;
-  rating: string;
+  status?: string;
+  type?: string;
+  rating?: string;
   page?: string;
+  q?: string;
+  'order-by': string;
 }
 
 async function getData(params?: Params) {
-  const ParamsDto = z.object({
-    status: z.string(),
-    type: z.string(),
-    rating: z.string(),
-    'order-by': z.string(),
-  });
-  const paramsValidation = ParamsDto.safeParse(params);
-  let API_URL = '';
-  if (paramsValidation.success) {
-    if (params?.page) {
-      API_URL = `${process.env.API_URL}/anime?status=${paramsValidation.data.status}&type=${paramsValidation.data.type}&rating=${paramsValidation.data.rating}&order_by=${paramsValidation.data['order-by']}&page=${params.page}`;
-    } else {
-      API_URL = `${process.env.API_URL}/anime?status=${paramsValidation.data.status}&type=${paramsValidation.data.type}&rating=${paramsValidation.data.rating}&order_by=${paramsValidation.data['order-by']}`;
-    }
-  } else {
-    if (params?.page) {
-      API_URL = `${process.env.API_URL}/anime?page=${params.page}`;
-    } else {
-      API_URL = `${process.env.API_URL}/anime`;
-    }
-  }
-  console.log(API_URL);
-  const res = await fetch(API_URL);
+  const paramsValue: Record<string, any> = {
+    status: params?.status,
+    type: params?.type,
+    rating: params?.rating,
+    q: params?.q,
+    order_by: params?.['order-by'],
+    page: params?.page,
+  };
+
+  const queryString: string = Object.keys(paramsValue)
+    .filter(
+      (key) => paramsValue[key] !== undefined && paramsValue[key] !== null
+    )
+    .map(
+      (key) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(paramsValue[key])}`
+    )
+    .join('&');
+
+  const res = await fetch(`${process.env.API_URL}/anime?${queryString}`);
 
   if (res.status == 429) {
     throw new Error('Too Many Request');
@@ -47,6 +49,7 @@ async function getData(params?: Params) {
 
   return res.json();
 }
+
 type Props = {
   params?: {
     num?: string;
@@ -55,34 +58,50 @@ type Props = {
 };
 
 const AnimePage = async (props: Props) => {
-  const animeList: Anime = await getData(props.searchParams);
+  const animeList: Animes = await getData(props.searchParams);
   if (!animeList.data) {
     return <>Nothing</>;
   }
   return (
-    <>
-      <SortOptions />
-      <div style={{ display: 'flex', flexWrap: 'wrap' }} className="w-50">
+    <div>
+      <div>
+        <Search params={props.searchParams} />
+        <SortOptions />
+      </div>
+      <div className="mt-8 2xl:grid-cols-6 grid xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 grid-cols-2 lg:place-items-start place-items-center">
         {animeList.data.map((anime) => (
-          <div key={crypto.randomUUID()}>
+          <Link
+            href={`anime/${anime.mal_id}`}
+            className="lg:w-48 sm:w-48 md:w-56 w-36 mb-10"
+            key={crypto.randomUUID()}
+          >
             <Image
+              width={200}
+              height={200}
               src={anime.images.webp.image_url}
-              width={250}
-              height={250}
+              className="lg:w-40 lg:h-48 md:w-56 sm:w-48 sm:h-52 w-36 h-40"
               alt={anime.title}
             />
-            <div>
-              <p>{anime.title}</p>
-              <p>{anime.score ? anime.score : '-'}</p>
+            <div className="lg:w-48 sm:w-48 md:w-56 w-36">
+              <p className="mt-6 font-bold w-full clear-both overflow-hidden overflow-ellipsis whitespace-nowrap">
+                {anime.title}
+              </p>
+              <p className="mt-2 font-normal w-full clear-both overflow-hidden overflow-ellipsis whitespace-nowrap">
+                {anime.year}
+              </p>
+              <div className="mt-2 text-main font-bold flex items-center">
+                <StarIcon />
+                <p className="ml-2">{anime.score}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <Paginate params={props.searchParams} animeList={animeList} />
       {/* {animeList.pagination.has_next_page && (
         <p onClick={() => props.searchParams?.page+1}>Next Page</p>
       )} */}
-    </>
+    </div>
   );
 };
 

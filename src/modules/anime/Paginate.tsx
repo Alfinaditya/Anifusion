@@ -1,13 +1,11 @@
 'use client';
-
 import React from 'react';
 import animeStore from './animeStore';
-import { Anime } from '@/types/anime';
+import Animes from '@/types/animes';
 import { Params } from './AnimePage';
 import { useRouter } from 'next/navigation';
-import { z } from 'zod';
 
-const Paginate: React.FC<{ animeList: Anime; params?: Params }> = ({
+const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
   animeList,
   params,
 }) => {
@@ -18,25 +16,28 @@ const Paginate: React.FC<{ animeList: Anime; params?: Params }> = ({
   }
   function handleChangeContent(page: number) {
     setPage(page);
-    const ParamsDto = z.object({
-      status: z.string(),
-      type: z.string(),
-      rating: z.string(),
-      'order-by': z.string(),
-    });
-    console.log(params);
-    const paramsValidation = ParamsDto.safeParse(params);
-    if (paramsValidation.success) {
-      router.replace(
-        `/anime?status=${paramsValidation.data.status}&type=${paramsValidation.data.type}&rating=${paramsValidation.data.rating}&order-by=${paramsValidation.data['order-by']}&page=${page}`
-      );
-    } else {
-      router.push(`/anime?page=${page}`);
-    }
+    const paramsValue: Record<string, any> = {
+      status: params?.status,
+      type: params?.type,
+      rating: params?.rating,
+      order_by: params?.['order-by'],
+      q: params?.q,
+      page,
+    };
+    const queryString: string = Object.keys(paramsValue)
+      .filter(
+        (key) => paramsValue[key] !== undefined && paramsValue[key] !== null
+      )
+      .map(
+        (key) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(paramsValue[key])}`
+      )
+      .join('&');
+    router.push(`/anime?${queryString}`);
   }
 
   return (
-    <div>
+    <div className="lg:mb-0 mb-28">
       {page > 1 && <p onClick={() => handleChangeContent(page - 1)}>Prev</p>}
       <p>{page}</p>
       {animeList.pagination.has_next_page && (

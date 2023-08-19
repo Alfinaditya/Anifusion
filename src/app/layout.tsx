@@ -1,9 +1,14 @@
 import Navbar from '@/modules/partials/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Quicksand } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
+import Header from '@/modules/partials/Header';
 
-const inter = Inter({ subsets: ['latin'] });
+const quicksand = Quicksand({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,9 +22,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
+      <body className={quicksand.className}>
+        <NextTopLoader
+          color="#FFD4E5"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={5}
+          crawl={true}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #FFD4E5,0 0 5px #FFD4E5"
+        />
+        <div className="xl:max-w-screen-2xl lg:w-11/12 m-auto">
+          <Header />
+          <div className="mt-12 flex justify-between m-auto">
+            <Navbar />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

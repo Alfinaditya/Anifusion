@@ -21,23 +21,11 @@ const SortOptions = () => {
     setOrderBy,
     orderBy,
     setPage,
+    setSearch,
   } = animeStore();
   const router = useRouter();
   function handleSort() {
-    // const foo = null;
-    // const params: Record<string, any> = {
-    //   id: 123,
-    //   name: 'John sdsdsdsdsd',
-    //   foo,
-    // };
-
-    // const queryString: string = Object.keys(params)
-    //   .map((key) => {
-    //     console.log(key);
-    //     return `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`;
-    //   })
-    //   .join('&');
-    // console.log(queryString);
+    setSearch('');
     router.push(
       `/anime?status=${status}&type=${type}&rating=${rating}&order-by=${orderBy}`
     );

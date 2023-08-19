@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 import { orderBy, ratings, statuses, types } from './sortUtils';
 
+// Get the current URL
+const currentUrl = typeof window !== 'undefined' && window.location.href;
+
+// Parse query parameters
+const urlSearchParams = new URLSearchParams(currentUrl as string);
+
 type Store = {
   type: string;
   status: string;
@@ -20,8 +26,10 @@ const animeStore = create<Store>()((set) => ({
   type: types[0].value,
   status: statuses[0].value,
   orderBy: orderBy[0].value,
-  search: '',
-  page: 1,
+  search: urlSearchParams.get('q') ? (urlSearchParams.get('q') as string) : '',
+  page: urlSearchParams.get('page')
+    ? parseInt(urlSearchParams.get('page') as string)
+    : 1,
   rating: ratings[0].value,
   setRating: (params: string) => set(() => ({ rating: params })),
   setType: (params: string) => set(() => ({ type: params })),

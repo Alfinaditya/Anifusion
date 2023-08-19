@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Anime } from '@/types/anime';
+import Animes from '@/types/animes';
 import Image from 'next/image';
 
 async function getData() {
@@ -18,7 +18,7 @@ async function getData() {
 }
 
 const UpcomingAnime = async () => {
-  const upcomingAnimeData: Anime = await getData();
+  const upcomingAnimeData: Animes = await getData();
 
   if (!upcomingAnimeData.data) {
     return <>Nothing</>;
