@@ -66,7 +66,7 @@ const AnimePage = async (props: Props) => {
   return (
     <>
       <Navbar />
-      <div>
+      <div className="w-full bg-blue-500">
         <div>
           <Search params={props.searchParams} />
           <SortOptions />
@@ -74,10 +74,9 @@ const AnimePage = async (props: Props) => {
         <div
           className={twMerge(
             'mt-8',
-            'grid grid-cols-2 place-items-center',
-            '2xl:grid-cols-6',
-            'xl:grid-cols-5',
-            'lg:grid-cols-4 sm:grid-cols-3 lg:place-items-start '
+            'bg-main',
+            'flex flex-wrap justify-center',
+            'gap-x-5'
           )}
         >
           {animeList.data.map((anime) => (
@@ -87,8 +86,9 @@ const AnimePage = async (props: Props) => {
                 'lg:w-48',
                 'sm:w-48',
                 'md:w-56',
-                'w-36',
-                'mb-10'
+                'w-48',
+                'mb-10',
+                'bg-yellow-500'
               )}
               key={crypto.randomUUID()}
             >
@@ -97,10 +97,11 @@ const AnimePage = async (props: Props) => {
                 height={200}
                 src={anime.images.webp.image_url}
                 className={twMerge(
-                  'lg:w-40 lg:h-48',
-                  'md:w-56',
-                  'sm:w-48 sm:h-52',
-                  'w-36 h-40'
+                  'w-full h-60'
+                  // 'lg:w-40 lg:h-48',
+                  // 'md:w-56',
+                  // 'sm:w-48 sm:h-52',
+                  // 'w-36 h-40'
                 )}
                 alt={anime.title}
               />

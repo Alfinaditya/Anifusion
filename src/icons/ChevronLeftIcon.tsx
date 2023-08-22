@@ -1,6 +1,7 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
-const ChevronLeftIcon = () => {
+const ChevronLeftIcon = ({ className }: { className: string }) => {
   return (
     <div>
       <svg
@@ -9,7 +10,7 @@ const ChevronLeftIcon = () => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-6 h-6"
+        className={twMerge('w-6 h-6', className)}
       >
         <path
           strokeLinecap="round"
