@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import { ThumbUpIcon } from '@/icons';
+import { twMerge } from 'tailwind-merge';
 const Recommendations = ({ id }: { id: string }) => {
   const [recommendations, setRecommendations] = useState<Recommendations>();
 
@@ -28,10 +29,13 @@ const Recommendations = ({ id }: { id: string }) => {
   return (
     <>
       <div className="mb-20">
-        <h1 className="font-bold text-2xl">Recommendations</h1>
+        <h1 className={twMerge('font-bold', 'text-2xl', 'px-4', 'mb-8')}>
+          Recommendations
+        </h1>
         {recommendations ? (
           <>
             <Swiper
+              slidesPerView={2}
               autoplay={{ delay: 1500 }}
               breakpoints={{
                 320: {
@@ -67,7 +71,14 @@ const Recommendations = ({ id }: { id: string }) => {
                       <p className="truncate...">
                         {recommendation.entry.title}
                       </p>
-                      <div className="text-main font-bold flex items-center mt-2">
+                      <div
+                        className={twMerge(
+                          'text-main',
+                          'font-bold,',
+                          'flex items-center',
+                          'mt-2'
+                        )}
+                      >
                         <ThumbUpIcon />
                         <p className="ml-2">{recommendation.votes}</p>
                       </div>

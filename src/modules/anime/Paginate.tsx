@@ -4,6 +4,7 @@ import animeStore from './animeStore';
 import Animes from '@/types/animes';
 import { Params } from './AnimePage';
 import { useRouter } from 'next/navigation';
+import { twMerge } from 'tailwind-merge';
 
 const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
   animeList,
@@ -37,7 +38,7 @@ const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
   }
 
   return (
-    <div className="lg:mb-0 mb-28">
+    <div className={twMerge('lg:mb-0', 'mb-28')}>
       {page > 1 && <p onClick={() => handleChangeContent(page - 1)}>Prev</p>}
       <p>{page}</p>
       {animeList.pagination.has_next_page && (

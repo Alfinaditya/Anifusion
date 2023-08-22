@@ -3,6 +3,7 @@ import Loading from '@/components/Loading';
 import Characters from '@/types/characters';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 const Characters = ({ id }: { id: string }) => {
   const [characters, setCharacters] = useState<Characters>();
@@ -31,13 +32,27 @@ const Characters = ({ id }: { id: string }) => {
   // }
   return (
     <div className="my-12">
-      <h1 className="font-bold text-2xl px-4">Characters</h1>
+      <h1 className={twMerge('font-bold text-2xl', 'px-4')}>Characters</h1>
       {characters ? (
         <>
-          <div className="grid xl:grid-cols-5 lg:grid-cols-4 lg:place-items-start place-items-center sm:grid-cols-3 grid-cols-2 mb-6 mt-8">
+          <div
+            className={twMerge(
+              'grid place-items-center grid-cols-2',
+              'mb-6 mt-8',
+              'xl:grid-cols-5',
+              'lg:grid-cols-4 lg:place-items-start',
+              'sm:grid-cols-3'
+            )}
+          >
             {characters.data.slice(0, displayCount).map((characterData) => (
               <div
-                className="w-36 md:w-56 lg:w-48 sm:w-48 mb-6"
+                className={twMerge(
+                  'w-36',
+                  'md:w-56',
+                  'lg:w-48',
+                  'sm:w-48',
+                  'mb-6'
+                )}
                 key={crypto.randomUUID()}
               >
                 <Image
@@ -48,7 +63,13 @@ const Characters = ({ id }: { id: string }) => {
                   alt={characterData.character.name}
                 />
                 <div className="sm:w-48 w-36">
-                  <p className="font-bold mt-3 w-full clear-both overflow-hidden overflow-ellipsis whitespace-nowrap">
+                  <p
+                    className={twMerge(
+                      'font-bold truncate ...',
+                      'mt-3',
+                      'w-full'
+                    )}
+                  >
                     {characterData.character.name}
                   </p>
                   <p>{characterData.role}</p>
@@ -56,17 +77,30 @@ const Characters = ({ id }: { id: string }) => {
               </div>
             ))}
           </div>
-          <div className="block w-full sm:p-0 pr-2">
+          <div className={twMerge('block', 'w-full', 'sm:p-0', 'pr-2')}>
             {displayCount < characters.data.length ? (
               <button
-                className="cursor-pointer ml-auto block text-main hover:text-pink-600 underline"
+                className={twMerge(
+                  'cursor-pointer',
+                  'ml-auto',
+                  'block',
+                  'text-main underline',
+                  'hover:text-pink-600'
+                )}
                 onClick={handleLoadMore}
               >
                 Show More
               </button>
             ) : (
               <button
-                className="cursor-pointer ml-auto block text-main hover:text-pink-600 underline"
+                // className="c ursor-pointer ml-auto block text-main hover:text-pink-600 underline"
+                className={twMerge(
+                  'cursor-pointer',
+                  'ml-auto',
+                  'block',
+                  'text-main underline',
+                  'hover:text-pink-600'
+                )}
                 onClick={handleShowLess}
               >
                 Show less

@@ -1,39 +1,50 @@
 'use client';
-import Link from 'next/link';
 import React from 'react';
 import { navLinks } from './navbarLinks';
-import { usePathname, useSearchParams } from 'next/navigation';
+import NavLink from '@/components/NavLink';
+import { twMerge } from 'tailwind-merge';
 
 const Navbar = () => {
-  const pathname = usePathname();
-  const router = useSearchParams();
-  console.log(router.entries);
   return (
-    <div className="sm:w-1/6 lg:block hidden">
+    <div className={twMerge('sm:w-1/6', 'lg:block', 'hidden')}>
+      <h1
+        className={twMerge(
+          'lg:ml-3 lg:mb-12',
+          'text-3xl text-main font-bold text-left',
+          'mb-12'
+        )}
+      >
+        Anifusion
+      </h1>
       <nav>
-        <ul className="flex flex-col pt-16 lg:pt-0">
+        <div className={twMerge('flex flex-col', 'pt-16', 'lg:pt-0')}>
           {navLinks.map((nav, i) => (
-            <li key={i} className="text-lg py-5">
-              <Link href={nav.path} className="flex">
-                {pathname === nav.path ? (
-                  <div className="lg:bg-secondary p-3 rounded-full flex">
+            <NavLink href={nav.path}>
+              {({ isActive }) => (
+                <div className="text-lg py-5">
+                  <div
+                    className={twMerge(
+                      isActive ? 'lg:bg-light-pink' : 'lg:bg-white bg-main',
+                      'p-3',
+                      'rounded-full',
+                      'flex'
+                    )}
+                  >
                     {nav.visitedIcon}
-                    <span className="ml-3 lg:text-main text-white">
+                    <span
+                      className={twMerge(
+                        'ml-3',
+                        isActive ? 'lg:text-main' : 'lg-text-black'
+                      )}
+                    >
                       {nav.text}
                     </span>
                   </div>
-                ) : (
-                  <div className="lg:bg-white bg-main p-3 rounded-full flex">
-                    {nav.unvisitedIcon}
-                    <span className="ml-3 lg:text-black text-white">
-                      {nav.text}
-                    </span>
-                  </div>
-                )}
-              </Link>
-            </li>
+                </div>
+              )}
+            </NavLink>
           ))}
-        </ul>
+        </div>
       </nav>
     </div>
   );

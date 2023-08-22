@@ -6,3 +6,4 @@ export { default as StarIcon } from './StarIcon';
 export { default as BookOpenIcon } from './BookOpenIcon';
 export { default as HomeIcon } from './HomeIcon';
 export { default as FilmIcon } from './FilmIcon';
+export { default as ChevronLeftIcon } from './ChevronLeftIcon';

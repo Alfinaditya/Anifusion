@@ -7,6 +7,7 @@ import Search from './Search';
 import Link from 'next/link';
 import { StarIcon } from '@/icons';
 import Navbar from '../partials/Navbar';
+import { twMerge } from 'tailwind-merge';
 
 export interface Params {
   status?: string;
@@ -63,45 +64,82 @@ const AnimePage = async (props: Props) => {
     return <>Nothing</>;
   }
   return (
-    <div>
+    <>
+      <Navbar />
       <div>
-        <Search params={props.searchParams} />
-        <SortOptions />
-      </div>
-      <div className="mt-8 2xl:grid-cols-6 grid xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 grid-cols-2 lg:place-items-start place-items-center">
-        {animeList.data.map((anime) => (
-          <Link
-            href={`anime/${anime.mal_id}`}
-            className="lg:w-48 sm:w-48 md:w-56 w-36 mb-10"
-            key={crypto.randomUUID()}
-          >
-            <Image
-              width={200}
-              height={200}
-              src={anime.images.webp.image_url}
-              className="lg:w-40 lg:h-48 md:w-56 sm:w-48 sm:h-52 w-36 h-40"
-              alt={anime.title}
-            />
-            <div className="lg:w-48 sm:w-48 md:w-56 w-36">
-              <p className="mt-6 font-bold w-full clear-both overflow-hidden overflow-ellipsis whitespace-nowrap">
-                {anime.title}
-              </p>
-              <p className="mt-2 font-normal w-full clear-both overflow-hidden overflow-ellipsis whitespace-nowrap">
-                {anime.year}
-              </p>
-              <div className="mt-2 text-main font-bold flex items-center">
-                <StarIcon />
-                <p className="ml-2">{anime.score}</p>
+        <div>
+          <Search params={props.searchParams} />
+          <SortOptions />
+        </div>
+        <div
+          className={twMerge(
+            'mt-8',
+            'grid grid-cols-2 place-items-center',
+            '2xl:grid-cols-6',
+            'xl:grid-cols-5',
+            'lg:grid-cols-4 sm:grid-cols-3 lg:place-items-start '
+          )}
+        >
+          {animeList.data.map((anime) => (
+            <Link
+              href={`anime/${anime.mal_id}`}
+              className={twMerge(
+                'lg:w-48',
+                'sm:w-48',
+                'md:w-56',
+                'w-36',
+                'mb-10'
+              )}
+              key={crypto.randomUUID()}
+            >
+              <Image
+                width={200}
+                height={200}
+                src={anime.images.webp.image_url}
+                className={twMerge(
+                  'lg:w-40 lg:h-48',
+                  'md:w-56',
+                  'sm:w-48 sm:h-52',
+                  'w-36 h-40'
+                )}
+                alt={anime.title}
+              />
+              <div className={twMerge('lg:w-48', 'sm:w-48', 'md:w-56', 'w-36')}>
+                <p
+                  className={twMerge(
+                    'mt-6',
+                    'font-bold truncate ...',
+                    'w-full'
+                  )}
+                >
+                  {anime.title}
+                </p>
+                <p
+                  className={twMerge(
+                    'mt-2',
+                    'font-normal truncate ...',
+                    'w-full'
+                  )}
+                >
+                  {anime.year}
+                </p>
+                <div
+                  className={twMerge(
+                    'mt-2',
+                    'text-main font-bold',
+                    'flex items-center'
+                  )}
+                >
+                  <StarIcon />
+                  <p className="ml-2">{anime.score ?? '-'}</p>
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
+        <Paginate params={props.searchParams} animeList={animeList} />
       </div>
-      <Paginate params={props.searchParams} animeList={animeList} />
-      {/* {animeList.pagination.has_next_page && (
-        <p onClick={() => props.searchParams?.page+1}>Next Page</p>
-      )} */}
-    </div>
+    </>
   );
 };
 

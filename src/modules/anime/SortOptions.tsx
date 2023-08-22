@@ -67,7 +67,12 @@ const SortOptions = () => {
           >
             <div className="flex flex-col gap-2.5">
               <div className="mb-3">
-                <p className="text-[15px] leading-[19px] font-medium mb-2.5">
+                <p
+                  className={twMerge(
+                    'text-[15px] leading-[19px] font-medium',
+                    'mb-2.5'
+                  )}
+                >
                   Type
                 </p>
                 <RadioGroup.Root
@@ -106,7 +111,7 @@ const SortOptions = () => {
                         />
                       </RadioGroup.Item>
                       <Label.Root
-                        className="font-medium pl-3"
+                        className={twMerge('font-medium', 'pl-3')}
                         htmlFor={`types-${i}`}
                       >
                         {type.label}
@@ -116,7 +121,12 @@ const SortOptions = () => {
                 </RadioGroup.Root>
               </div>
               <div className="mb-3">
-                <p className="text-[15px] leading-[19px] font-medium mb-2.5">
+                <p
+                  className={twMerge(
+                    'text-[15px] leading-[19px] font-medium',
+                    'mb-2.5'
+                  )}
+                >
                   Status
                 </p>
                 <RadioGroup.Root
@@ -153,7 +163,7 @@ const SortOptions = () => {
                         />
                       </RadioGroup.Item>
                       <Label.Root
-                        className="font-medium pl-3"
+                        className={twMerge('font-medium', 'pl-3')}
                         htmlFor={`statuses-${i}`}
                       >
                         {status.label}
@@ -163,7 +173,12 @@ const SortOptions = () => {
                 </RadioGroup.Root>
               </div>
               <div className="mb-3">
-                <p className="text-[15px] leading-[19px] font-medium mb-2.5">
+                <p
+                  className={twMerge(
+                    'text-[15px] leading-[19px] font-medium',
+                    'mb-2.5'
+                  )}
+                >
                   Rating
                 </p>
                 <RadioGroup.Root
@@ -200,7 +215,7 @@ const SortOptions = () => {
                         />
                       </RadioGroup.Item>
                       <Label.Root
-                        className="font-medium pl-3"
+                        className={twMerge('font-medium', 'pl-3')}
                         htmlFor={`rating-${i}`}
                       >
                         {rating.label}
@@ -210,7 +225,12 @@ const SortOptions = () => {
                 </RadioGroup.Root>
               </div>
               <div className="mb-3">
-                <p className="text-[15px] leading-[19px] font-medium mb-2.5">
+                <p
+                  className={twMerge(
+                    'text-[15px] leading-[19px] font-medium',
+                    'mb-2.5'
+                  )}
+                >
                   Order By
                 </p>
                 <RadioGroup.Root
@@ -247,7 +267,7 @@ const SortOptions = () => {
                         />
                       </RadioGroup.Item>
                       <Label.Root
-                        className="font-medium pl-3"
+                        className={twMerge('font-medium', 'pl-3')}
                         htmlFor={`order-by-${i}`}
                       >
                         {by.label}

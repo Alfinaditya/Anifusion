@@ -5,7 +5,7 @@ interface Props {
 }
 const Loading: React.FC<Props> = ({ text }) => {
   return (
-    <div role="status" className="text-center">
+    <div role="status" className="text-center m-auto">
       <svg
         aria-hidden="true"
         className={twMerge(

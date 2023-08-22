@@ -34,12 +34,8 @@ export default function RootLayout({
           speed={200}
           shadow="0 0 10px #FFD4E5,0 0 5px #FFD4E5"
         />
-        <div className="xl:max-w-screen-2xl lg:w-11/12 m-auto">
-          <Header />
-          <div className="mt-12 flex justify-between m-auto">
-            <Navbar />
-            {children}
-          </div>
+        <div className=" mt-12 xl:max-w-screen-2xl lg:w-11/12 m-auto  flex justify-between m-auto">
+          {children}
         </div>
       </body>
     </html>
