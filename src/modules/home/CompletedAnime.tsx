@@ -1,4 +1,3 @@
-import Loading from '@/components/Loading';
 import { StarIcon } from '@/icons';
 import Animes from '@/types/animes';
 import Image from 'next/image';
@@ -28,7 +27,7 @@ const CompletedAnime = async () => {
     <div className={twMerge('mt-20 mb-32', 'lg:mb-10')}>
       <h1
         className={twMerge(
-          'sm:ml-2 sm:text-left',
+          'sm:ml-2 lg:text-left',
           'font-bold text-xl text-center'
         )}
       >
@@ -56,7 +55,7 @@ const CompletedAnime = async () => {
                     'lg:w-48',
                     'sm:w-48',
                     'md:w-56',
-                    'w-48',
+                    'w-36',
                     'mb-10',
                     'cursor-pointer'
                   )}

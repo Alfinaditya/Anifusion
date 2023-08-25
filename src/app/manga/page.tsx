@@ -1,13 +1,3 @@
-import Navbar from '@/modules/partials/Navbar';
-import React from 'react';
+import MangaPage from '@/modules/manga/MangaPage';
 
-const Manga = () => {
-  return (
-    <div>
-      <Navbar />
-      <div></div>
-    </div>
-  );
-};
-
-export default Manga;
+export default MangaPage;

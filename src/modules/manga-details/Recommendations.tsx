@@ -9,11 +9,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { ThumbUpIcon } from '@/icons';
 import { twMerge } from 'tailwind-merge';
+
 const Recommendations = ({ id }: { id: string }) => {
   const [recommendations, setRecommendations] = useState<Recommendations>();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/anime/${id}/recommendations`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/manga/${id}/recommendations`)
       .then((x) => {
         if (x.ok) {
           return x.json();
@@ -56,7 +57,7 @@ const Recommendations = ({ id }: { id: string }) => {
             >
               {recommendations.data.map((recommendation) => (
                 <SwiperSlide key={crypto.randomUUID()}>
-                  <Link href={`/anime/${recommendation.entry.mal_id}`}>
+                  <Link href={`/manga/${recommendation.entry.mal_id}`}>
                     <Image
                       width={400}
                       height={150}

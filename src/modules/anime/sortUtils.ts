@@ -89,3 +89,14 @@ export const statuses = [
     label: 'Upcoming',
   },
 ];
+
+export const sorts = [
+  {
+    value: 'desc',
+    label: 'Descending',
+  },
+  {
+    value: 'asc',
+    label: 'Ascending',
+  },
+];

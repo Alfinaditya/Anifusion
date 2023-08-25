@@ -30,7 +30,7 @@ const UpcomingAnime = async () => {
     <>
       <h1
         className={twMerge(
-          'sm:ml-2 sm:text-left',
+          'sm:ml-2 lg:text-left',
           'font-bold text-xl text-center'
         )}
       >
@@ -60,7 +60,7 @@ const UpcomingAnime = async () => {
                     'lg:w-48',
                     'sm:w-48',
                     'md:w-56',
-                    'w-48',
+                    'w-36',
                     'mb-10',
                     'cursor-pointer'
                   )}
@@ -69,15 +69,11 @@ const UpcomingAnime = async () => {
                     width={400}
                     height={400}
                     src={anime.images.webp.image_url}
-                    className={
-                      twMerge('w-full h-60', 'shadow-lg', 'hover:shadow-xl')
-                      // 'lg:w-40 lg:h-48',
-                      // 'md:w-56',
-                      // 'sm:w-48 sm:h-52',
-                      // 'w-full h-full',
-                      // 'shadow-lg',
-                      // 'hover:shadow-xl'
-                    }
+                    className={twMerge(
+                      'w-full h-60',
+                      'shadow-lg',
+                      'hover:shadow-xl'
+                    )}
                     alt={anime.title}
                   />
                   <div
@@ -120,6 +116,8 @@ const UpcomingAnime = async () => {
               className={twMerge(
                 'text-main font-medium text-lg underline',
                 'rounded',
+                'lg:text-left',
+                'text-center',
                 'ml-2'
               )}
             >

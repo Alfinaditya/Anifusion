@@ -1,10 +1,7 @@
-import Navbar from '@/modules/partials/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Quicksand } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
-import Header from '@/modules/partials/Header';
-import { twMerge } from 'tailwind-merge';
 
 const quicksand = Quicksand({
   subsets: ['latin'],

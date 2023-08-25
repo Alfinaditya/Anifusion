@@ -1,14 +1,14 @@
 'use client';
 import React, { useEffect } from 'react';
-import animeStore from './animeStore';
-import Animes from '@/types/animes';
-import { Params } from './AnimePage';
+import animeStore from './mangaStore';
+import Mangas from '@/types/mangas';
+import { Params } from './MangaPage';
 import { useRouter } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import { ChevronLeftIcon, ChevronRightIcon } from '@/icons';
 
-const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
-  animeList,
+const Paginate: React.FC<{ mangaList: Mangas; params?: Params }> = ({
+  mangaList,
   params,
 }) => {
   const router = useRouter();
@@ -18,7 +18,7 @@ const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
     setPage(params?.page ? (parseInt(params.page) as unknown as number) : 1);
   }, [params?.page]);
 
-  if (!animeList) {
+  if (!mangaList) {
     return <></>;
   }
   function handleChangeContent(page: number) {
@@ -26,7 +26,6 @@ const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
     const paramsValue: Record<string, any> = {
       status: params?.status,
       type: params?.type,
-      rating: params?.rating,
       order_by: params?.['order-by'],
       sort: params?.sort,
       q: params?.q,
@@ -41,7 +40,7 @@ const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
           `${encodeURIComponent(key)}=${encodeURIComponent(paramsValue[key])}`
       )
       .join('&');
-    router.push(`/anime?${queryString}`, { scroll: true });
+    router.push(`/manga?${queryString}`, { scroll: true });
   }
 
   return (
@@ -62,7 +61,7 @@ const Paginate: React.FC<{ animeList: Animes; params?: Params }> = ({
         />
       )}
       <p className="font-bold text-main">{page}</p>
-      {animeList.pagination.has_next_page && (
+      {mangaList.pagination.has_next_page && (
         <ChevronRightIcon
           onClick={() => handleChangeContent(page + 1)}
           className="cursor-pointer"

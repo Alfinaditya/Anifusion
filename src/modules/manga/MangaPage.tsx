@@ -1,29 +1,28 @@
-import Animes from '@/types/animes';
-import Image from 'next/image';
 import React from 'react';
-import SortOptions from './SortOptions';
-import Paginate from './Paginate';
+import Navbar from '../partials/Navbar';
+import Mangas from '@/types/mangas';
+import { twMerge } from 'tailwind-merge';
 import Search from './Search';
 import Link from 'next/link';
+import Image from 'next/image';
 import { StarIcon } from '@/icons';
-import Navbar from '../partials/Navbar';
-import { twMerge } from 'tailwind-merge';
+import SortOptions from './SortOptions';
+import Paginate from './Paginate';
+// import SortOptions from '../anime/SortOptions';
 
 export interface Params {
   status?: string;
   type?: string;
-  rating?: string;
   page?: string;
   q?: string;
   sort?: string;
-  'order-by': string;
+  'order-by'?: string;
 }
 
 async function getData(params?: Params) {
   const paramsValue: Record<string, any> = {
     status: params?.status,
     type: params?.type,
-    rating: params?.rating,
     q: params?.q,
     order_by: params?.['order-by'],
     sort: params?.sort,
@@ -40,7 +39,7 @@ async function getData(params?: Params) {
     )
     .join('&');
 
-  const res = await fetch(`${process.env.API_URL}/anime?${queryString}`);
+  const res = await fetch(`${process.env.API_URL}/manga?${queryString}`);
 
   if (res.status == 429) {
     throw new Error('Too Many Request');
@@ -60,9 +59,9 @@ type Props = {
   searchParams?: Params;
 };
 
-const AnimePage = async (props: Props) => {
-  const animeList: Animes = await getData(props.searchParams);
-  if (!animeList.data) {
+const MangaPage = async (props: Props) => {
+  const mangaList: Mangas = await getData(props.searchParams);
+  if (!mangaList.data) {
     return <></>;
   }
   return (
@@ -90,9 +89,9 @@ const AnimePage = async (props: Props) => {
             'gap-x-2'
           )}
         >
-          {animeList.data.map((anime) => (
+          {mangaList.data.map((manga) => (
             <Link
-              href={`anime/${anime.mal_id}`}
+              href={`manga/${manga.mal_id}`}
               className={twMerge(
                 'lg:w-48',
                 'sm:w-48',
@@ -105,13 +104,13 @@ const AnimePage = async (props: Props) => {
               <Image
                 width={200}
                 height={200}
-                src={anime.images.webp.image_url}
+                src={manga.images.webp.image_url}
                 className={twMerge(
                   'w-full h-60',
                   'shadow-lg',
                   'hover:shadow-xl'
                 )}
-                alt={anime.title}
+                alt={manga.title}
               />
               <div className={twMerge('lg:w-48', 'sm:w-48', 'md:w-56', 'w-36')}>
                 <p
@@ -121,17 +120,17 @@ const AnimePage = async (props: Props) => {
                     'w-full'
                   )}
                 >
-                  {anime.title}
+                  {manga.title}
                 </p>
-                <p
+                {/* <p
                   className={twMerge(
                     'mt-2',
                     'font-normal truncate ...',
                     'w-full'
                   )}
                 >
-                  {anime.year}
-                </p>
+                  {manga.}
+                </p> */}
                 <div
                   className={twMerge(
                     'mt-2',
@@ -140,16 +139,16 @@ const AnimePage = async (props: Props) => {
                   )}
                 >
                   <StarIcon />
-                  <p className="ml-2">{anime.score ?? '-'}</p>
+                  <p className="ml-2">{manga.score ?? '-'}</p>
                 </div>
               </div>
             </Link>
           ))}
         </div>
-        <Paginate params={props.searchParams} animeList={animeList} />
+        <Paginate params={props.searchParams} mangaList={mangaList} />
       </div>
     </>
   );
 };
 
-export default AnimePage;
+export default MangaPage;

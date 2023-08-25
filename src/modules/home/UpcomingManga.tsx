@@ -1,5 +1,4 @@
-import Loading from '@/components/Loading';
-import { Manga } from '@/types/manga';
+import Mangas from '@/types/mangas';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -23,12 +22,12 @@ async function getData() {
 }
 
 const UpcomingManga = async () => {
-  const upcomingMangaData: Manga = await getData();
+  const upcomingMangaData: Mangas = await getData();
   return (
     <div className={twMerge('mt-20 mb-32', 'lg:mb-10')}>
       <h1
         className={twMerge(
-          'sm:ml-2 sm:text-left',
+          'sm:ml-2 lg:text-left',
           'font-bold text-xl text-center'
         )}
       >
@@ -56,7 +55,7 @@ const UpcomingManga = async () => {
                     'lg:w-48',
                     'sm:w-48',
                     'md:w-56',
-                    'w-48',
+                    'w-36',
                     'mb-10',
                     'cursor-pointer'
                   )}

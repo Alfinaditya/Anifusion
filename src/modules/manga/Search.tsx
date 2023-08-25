@@ -1,21 +1,20 @@
 'use client';
 import React from 'react';
-import { Params } from './AnimePage';
-import animeStore from './animeStore';
+import mangaStore from './mangaStore';
 import { useRouter } from 'next/navigation';
-import MagnifyingGlassIcon from '@/icons/MagnifyingGlassIcon';
+import { Params } from './MangaPage';
 import { twMerge } from 'tailwind-merge';
+import MagnifyingGlassIcon from '@/icons/MagnifyingGlassIcon';
 
 const Search: React.FC<{ params?: Params }> = ({ params }) => {
   const router = useRouter();
-  const { search, setSearch, setPage } = animeStore();
+  const { search, setSearch, setPage } = mangaStore();
 
   function handleSearch() {
     setPage(1);
     const paramsValue: Record<string, any> = {
       status: params?.status,
       type: params?.type,
-      rating: params?.rating,
       order_by: params?.['order-by'],
       sort: params?.sort,
       page: 1,
@@ -30,7 +29,7 @@ const Search: React.FC<{ params?: Params }> = ({ params }) => {
           `${encodeURIComponent(key)}=${encodeURIComponent(paramsValue[key])}`
       )
       .join('&');
-    router.push(`/anime?${queryString}`);
+    router.push(`/manga?${queryString}`);
   }
   return (
     <div

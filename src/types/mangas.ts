@@ -1,20 +1,34 @@
-export default interface Manga {
-  data: Data;
+export default interface Mangas {
+  pagination: Pagination;
+  data: Daum[];
 }
 
-export interface Data {
+export interface Pagination {
+  last_visible_page: number;
+  has_next_page: boolean;
+  current_page: number;
+  items: Items;
+}
+
+export interface Items {
+  count: number;
+  total: number;
+  per_page: number;
+}
+
+export interface Daum {
   mal_id: number;
   url: string;
   images: Images;
   approved: boolean;
   titles: Title[];
   title: string;
-  title_english: string;
+  title_english?: string;
   title_japanese: string;
-  title_synonyms: any[];
+  title_synonyms: string[];
   type: string;
-  chapters: number;
-  volumes: number;
+  chapters?: number;
+  volumes?: number;
   status: string;
   publishing: boolean;
   published: Published;
@@ -59,7 +73,7 @@ export interface Title {
 
 export interface Published {
   from: string;
-  to: string;
+  to?: string;
   prop: Prop;
   string: string;
 }
@@ -76,9 +90,9 @@ export interface From {
 }
 
 export interface To {
-  day: number;
-  month: number;
-  year: number;
+  day?: number;
+  month?: number;
+  year?: number;
 }
 
 export interface Author {

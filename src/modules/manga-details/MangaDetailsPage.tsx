@@ -1,14 +1,15 @@
-import Anime from '@/types/anime';
 import Image from 'next/image';
 import React from 'react';
-import Characters from './Characters';
-import Recommendations from './Recommendations';
 import { twMerge } from 'tailwind-merge';
 import { ChevronLeftIcon } from '@/icons';
 
 import Link from 'next/link';
+import Manga from '@/types/manga';
+import Characters from './Characters';
+import Recommendations from './Recommendations';
+
 async function getData(id: string) {
-  const res = await fetch(`${process.env.API_URL}/anime/${id}`);
+  const res = await fetch(`${process.env.API_URL}/manga/${id}`);
 
   if (res.status == 429) {
     throw new Error('Too Many Request');
@@ -17,14 +18,14 @@ async function getData(id: string) {
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
-
   return res.json();
 }
-const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
-  const anime: Anime = await getData(params.id);
+
+const MangaDetailsPage = async ({ params }: { params: { id: string } }) => {
+  const manga: Manga = await getData(params.id);
   return (
     <div className={twMerge('w-[95%]', 'm-auto mt-12')}>
-      <Link className={twMerge('flex items-center', 'mb-6')} href="/anime">
+      <Link className={twMerge('flex items-center', 'mb-6')} href="/manga">
         <ChevronLeftIcon />
         <span className="font-semibold">Back</span>
       </Link>
@@ -38,11 +39,11 @@ const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
       >
         <div className={twMerge('mb-13', 'sm:w-80', 'w-full')}>
           <Image
-            src={anime.data.images.webp.large_image_url}
+            src={manga.data.images.webp.image_url}
             width={400}
             height={400}
             className={twMerge('sm:w-full w-full')}
-            alt={anime.data.title}
+            alt={manga.data.title}
           />
           <div className="rounded-xl">
             <div
@@ -57,24 +58,17 @@ const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
               Score
             </div>
             <p className={twMerge('text-center font-bold text-4xl', 'mt-3')}>
-              {anime.data.score}
+              {manga.data.score}
             </p>
           </div>
         </div>
 
         <div className="lg:w-3/5 md:w-full">
           <h1 className="font-quicksand font-medium text-3xl">
-            {anime.data.title}
+            {manga.data.title}
           </h1>
-          <iframe
-            src={anime.data.trailer.embed_url}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title={anime.data.title}
-            className={twMerge('m-auto my-8', 'w-full h-96')}
-          />
           <p className={twMerge('font-roboto font-light', 'mt-3')}>
-            {anime.data.synopsis}
+            {manga.data.synopsis}
           </p>
           <div
             className={twMerge(
@@ -86,39 +80,31 @@ const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
             <div>
               <p className="mb-1">
                 <span className="font-bold text-main">Japanese : </span>
-                {anime.data.title_japanese}
+                {manga.data.title_japanese}
               </p>
               <p className="mb-1">
                 <span className="font-bold text-main">Type : </span>
-                {anime.data.type}
+                {manga.data.type}
               </p>
               <p className="mb-1">
                 <span className="font-bold text-main">Status : </span>
-                {anime.data.status}
+                {manga.data.status}
               </p>
             </div>
             <div>
               <p className="mb-1">
                 <span className="font-bold text-main">Score: </span>
-                {anime.data.score}
+                {manga.data.score}
               </p>
               <p className="mb-1">
                 <span className="font-bold text-main">Episodes: </span>
-                {anime.data.episodes}
-              </p>
-              <p className="mb-1">
-                <span className="font-bold text-main">Rating: </span>
-                {anime.data.rating}
-              </p>
-              <p className="mb-1">
-                <span className="font-bold text-main">Duration: </span>
-                {anime.data.duration}
+                {manga.data.volumes}
               </p>
             </div>
           </div>
           <div className={twMerge('flex flex-wrap', 'pb-9 ')}>
-            {anime.data.genres &&
-              anime.data.genres.map((genre) => (
+            {manga.data.genres &&
+              manga.data.genres.map((genre) => (
                 <div
                   key={crypto.randomUUID()}
                   className={twMerge(
@@ -135,15 +121,10 @@ const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </div>
-      {/* <div className="flex">
-          {anime.data.genres.map((genre) => (
-            <div key={crypto.randomUUID()}>{genre.name}</div>
-          ))}
-        </div> */}
       <Characters id={params.id} />
       <Recommendations id={params.id} />
     </div>
   );
 };
 
-export default AnimeDetailsPage;
+export default MangaDetailsPage;
