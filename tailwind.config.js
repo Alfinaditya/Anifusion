@@ -6,6 +6,8 @@ module.exports = {
     './src/icons/**/*.{js,ts,jsx,tsx,mdx}',
     './src/modules/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    // './node_modules/flowbite-react/**/*.js',
+    './node_modules/flowbite/**/*.js',
   ],
   theme: {
     extend: {
@@ -50,5 +52,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

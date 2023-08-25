@@ -1,7 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
-const ChevronLeftIcon = ({
+const ChevronRightIcon = ({
   className,
   onClick,
 }: {
@@ -21,10 +21,10 @@ const ChevronLeftIcon = ({
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M15.75 19.5L8.25 12l7.5-7.5"
+        d="M8.25 4.5l7.5 7.5-7.5 7.5"
       />
     </svg>
   );
 };
 
-export default ChevronLeftIcon;
+export default ChevronRightIcon;

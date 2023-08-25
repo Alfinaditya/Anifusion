@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Quicksand } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 import Header from '@/modules/partials/Header';
+import { twMerge } from 'tailwind-merge';
 
 const quicksand = Quicksand({
   subsets: ['latin'],
@@ -34,9 +35,13 @@ export default function RootLayout({
           speed={200}
           shadow="0 0 10px #FFD4E5,0 0 5px #FFD4E5"
         />
-        <div className=" mt-12 xl:max-w-screen-2xl lg:w-11/12 m-auto  flex justify-between m-auto">
-          {children}
-        </div>
+        {/* className={twMerge(
+            'mt-12 m-auto',
+            'xl:max-w-screen-2xl',
+            'lg:w-11/12',
+            'flex justify-between'
+          )} */}
+        <div className="flex">{children}</div>
       </body>
     </html>
   );

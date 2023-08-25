@@ -9,7 +9,7 @@ const AdjustmentsIcon = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={twMerge('w-3 h-3', className)}
+      className={twMerge('w-5 h-5', className)}
     >
       <path
         strokeLinecap="round"

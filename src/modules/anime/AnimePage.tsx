@@ -66,17 +66,26 @@ const AnimePage = async (props: Props) => {
   return (
     <>
       <Navbar />
-      <div className="w-full bg-blue-500">
+      <div className="lg:w-full w-[95%] m-auto lg:mx-10 mt-12">
         <div>
+          <h1
+            className={twMerge(
+              'text-3xl text-main font-bold text-left',
+              'mb-12'
+            )}
+          >
+            Anifusion
+          </h1>
           <Search params={props.searchParams} />
           <SortOptions />
         </div>
         <div
           className={twMerge(
             'mt-8',
-            'bg-main',
-            'flex flex-wrap justify-center',
-            'gap-x-5'
+            'flex flex-wrap',
+            'lg:justify-start justify-evenly',
+            'lg:gap-x-5',
+            'gap-x-2'
           )}
         >
           {animeList.data.map((anime) => (
@@ -87,8 +96,7 @@ const AnimePage = async (props: Props) => {
                 'sm:w-48',
                 'md:w-56',
                 'w-48',
-                'mb-10',
-                'bg-yellow-500'
+                'mb-10'
               )}
               key={crypto.randomUUID()}
             >
@@ -97,7 +105,9 @@ const AnimePage = async (props: Props) => {
                 height={200}
                 src={anime.images.webp.image_url}
                 className={twMerge(
-                  'w-full h-60'
+                  'w-full h-60',
+                  'shadow-lg',
+                  'hover:shadow-xl'
                   // 'lg:w-40 lg:h-48',
                   // 'md:w-56',
                   // 'sm:w-48 sm:h-52',

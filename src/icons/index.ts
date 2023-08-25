@@ -7,4 +7,5 @@ export { default as BookOpenIcon } from './BookOpenIcon';
 export { default as HomeIcon } from './HomeIcon';
 export { default as FilmIcon } from './FilmIcon';
 export { default as ChevronLeftIcon } from './ChevronLeftIcon';
+export { default as ChevronRightIcon } from './ChevronRightIcon';
 export { default as UserGroupIcon } from './UserGroupIcon';

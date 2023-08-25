@@ -23,29 +23,32 @@ async function getData() {
 
 const UpcomingAnime = async () => {
   const upcomingAnimeData: Animes = await getData();
-
+  function handleClick() {
+    'use client';
+  }
   return (
-    <div>
+    <>
       <h1
         className={twMerge(
           'sm:ml-2 sm:text-left',
           'font-bold text-xl text-center'
         )}
       >
-        <span className="text-main">Upcoming</span> anime
+        <p className="mb-5">
+          <span className="text-main">Upcoming</span> Anime
+        </p>
       </h1>
       {!upcomingAnimeData.data ? (
         <Empty text="No Upcoming Anime" />
       ) : (
-        <div>
+        <>
           <div
             className={twMerge(
-              'mt-8',
-              'grid grid-cols-2 place-items-center',
-              '2xl:grid-cols-6',
-              'xl:grid-cols-5',
-              'lg:grid-cols-4 lg:place-items-start',
-              'sm:grid-cols-3'
+              'mt-12',
+              'flex flex-wrap',
+              'lg:justify-start justify-evenly',
+              'lg:gap-x-5',
+              'gap-x-2'
             )}
           >
             {upcomingAnimeData &&
@@ -57,7 +60,7 @@ const UpcomingAnime = async () => {
                     'lg:w-48',
                     'sm:w-48',
                     'md:w-56',
-                    'w-36',
+                    'w-48',
                     'mb-10',
                     'cursor-pointer'
                   )}
@@ -66,14 +69,15 @@ const UpcomingAnime = async () => {
                     width={400}
                     height={400}
                     src={anime.images.webp.image_url}
-                    className={twMerge(
-                      'lg:w-40 lg:h-48',
-                      'md:w-56',
-                      'sm:w-48 sm:h-52',
-                      'w-full h-full',
-                      'shadow-lg',
-                      'hover:shadow-xl'
-                    )}
+                    className={
+                      twMerge('w-full h-60', 'shadow-lg', 'hover:shadow-xl')
+                      // 'lg:w-40 lg:h-48',
+                      // 'md:w-56',
+                      // 'sm:w-48 sm:h-52',
+                      // 'w-full h-full',
+                      // 'shadow-lg',
+                      // 'hover:shadow-xl'
+                    }
                     alt={anime.title}
                   />
                   <div
@@ -122,9 +126,9 @@ const UpcomingAnime = async () => {
               More Upcoming Anime...
             </p>
           </Link>
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 };
 

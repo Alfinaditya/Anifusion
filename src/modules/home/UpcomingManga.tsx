@@ -41,11 +41,10 @@ const UpcomingManga = async () => {
           <div
             className={twMerge(
               'mt-8',
-              'grid grid-cols-2 place-items-center',
-              '2xl:grid-cols-6',
-              'xl:grid-cols-5',
-              'lg:grid-cols-4 lg:place-items-start',
-              'sm:grid-cols-3'
+              'flex flex-wrap',
+              'lg:justify-start justify-evenly',
+              'lg:gap-x-5',
+              'gap-x-2'
             )}
           >
             {upcomingMangaData &&
@@ -57,7 +56,7 @@ const UpcomingManga = async () => {
                     'lg:w-48',
                     'sm:w-48',
                     'md:w-56',
-                    'w-36',
+                    'w-48',
                     'mb-10',
                     'cursor-pointer'
                   )}
@@ -67,10 +66,7 @@ const UpcomingManga = async () => {
                     height={400}
                     src={manga.images.webp.image_url}
                     className={twMerge(
-                      'lg:w-40 lg:h-48',
-                      'md:w-56',
-                      'sm:w-48 sm:h-52',
-                      'w-full h-full',
+                      'w-full h-60',
                       'shadow-lg',
                       'hover:shadow-xl'
                     )}

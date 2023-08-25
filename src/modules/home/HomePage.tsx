@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <div>
+      <div className="w-full lg:mx-10 mt-12">
         <UpcomingAnime />
         <CompletedAnime />
         <UpcomingManga />

@@ -5,6 +5,7 @@ import Characters from './Characters';
 import Recommendations from './Recommendations';
 import { twMerge } from 'tailwind-merge';
 import { ChevronLeftIcon } from '@/icons';
+
 import Link from 'next/link';
 async function getData(id: string) {
   const res = await fetch(`${process.env.API_URL}/anime/${id}`);
@@ -22,7 +23,7 @@ async function getData(id: string) {
 const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
   const anime: Anime = await getData(params.id);
   return (
-    <div className="w-full">
+    <div className={twMerge('w-[95%]', 'm-auto mt-12')}>
       <Link className={twMerge('flex items-center', 'mb-6')} href="/anime">
         <ChevronLeftIcon />
         <span className="font-semibold">Back</span>
