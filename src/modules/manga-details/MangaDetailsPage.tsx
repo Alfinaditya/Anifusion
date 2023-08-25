@@ -11,10 +11,6 @@ import Recommendations from './Recommendations';
 async function getData(id: string) {
   const res = await fetch(`${process.env.API_URL}/manga/${id}`);
 
-  if (res.status === 429) {
-    throw new Error('Too Many Request');
-  }
-
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }

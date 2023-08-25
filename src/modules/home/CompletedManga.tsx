@@ -11,10 +11,6 @@ async function getData() {
   const res = await fetch(
     `${process.env.API_URL}/manga?status=complete&limit=16`
   );
-
-  if (res.status === 429) {
-    throw new Error('Too Many Request');
-  }
   //   console.log(res.status);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
