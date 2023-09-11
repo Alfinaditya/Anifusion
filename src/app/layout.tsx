@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: 'Anifusion',
     images: [
       {
-        url: '/brand.svg',
+        url: './brand.svg',
       },
     ],
     locale: 'en-US',
