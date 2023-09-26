@@ -1,14 +1,15 @@
-import Anime from '@/types/anime';
 import Image from 'next/image';
 import React from 'react';
 import Characters from './Characters';
 import Recommendations from './Recommendations';
-import { twMerge } from 'tailwind-merge';
 import { ChevronLeftIcon } from '@/icons';
-
 import Link from 'next/link';
+import { apiUrl } from '@/lib/consts';
+import { AnimeDetails } from '@/types/animes';
+import cn from '@/utils/tw';
+
 async function getData(id: string) {
-  const res = await fetch(`${process.env.API_URL}/anime/${id}`);
+  const res = await fetch(`${apiUrl}/anime/${id}`);
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -17,32 +18,32 @@ async function getData(id: string) {
   return res.json();
 }
 const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
-  const anime: Anime = await getData(params.id);
+  const anime: AnimeDetails = await getData(params.id);
   return (
-    <div className={twMerge('w-[95%]', 'm-auto mt-12')}>
-      <Link className={twMerge('flex items-center', 'mb-6')} href="/anime">
+    <div className={cn('w-[95%]', 'm-auto mt-12')}>
+      <Link className={cn('flex items-center', 'mb-6')} href="/anime">
         <ChevronLeftIcon />
         <span className="font-semibold">Back</span>
       </Link>
       <div
-        className={twMerge(
+        className={cn(
           'xl:justify-between xl:flex-row xl:items-stretch',
           'sm:w-full',
           'flex flex-wrap flex-col items-center',
           'px-4'
         )}
       >
-        <div className={twMerge('mb-13', 'sm:w-80', 'w-full')}>
+        <div className={cn('mb-13', 'sm:w-80', 'w-full')}>
           <Image
             src={anime.data.images.webp.large_image_url}
             width={400}
             height={400}
-            className={twMerge('sm:w-full w-full')}
+            className={cn('sm:w-full w-full')}
             alt={anime.data.title}
           />
           <div className="rounded-xl">
             <div
-              className={twMerge(
+              className={cn(
                 'bg-main',
                 'text-white text-lg font-medium text-center',
                 'p-1',
@@ -52,7 +53,7 @@ const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
             >
               Score
             </div>
-            <p className={twMerge('text-center font-bold text-4xl', 'mt-3')}>
+            <p className={cn('text-center font-bold text-4xl', 'mt-3')}>
               {anime.data.score}
             </p>
           </div>
@@ -67,13 +68,13 @@ const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             title={anime.data.title}
-            className={twMerge('m-auto my-8', 'w-full h-96')}
+            className={cn('m-auto my-8', 'w-full h-96')}
           />
-          <p className={twMerge('font-roboto font-light', 'mt-3')}>
+          <p className={cn('font-roboto font-light', 'mt-3')}>
             {anime.data.synopsis}
           </p>
           <div
-            className={twMerge(
+            className={cn(
               'my-9',
               'flex flex-col',
               'md:justify-between md:flex-row'
@@ -112,12 +113,12 @@ const AnimeDetailsPage = async ({ params }: { params: { id: string } }) => {
               </p>
             </div>
           </div>
-          <div className={twMerge('flex flex-wrap', 'pb-9 ')}>
+          <div className={cn('flex flex-wrap', 'pb-9 ')}>
             {anime.data.genres &&
               anime.data.genres.map((genre) => (
                 <div
                   key={crypto.randomUUID()}
-                  className={twMerge(
+                  className={cn(
                     'bg-main',
                     'p-1 px-4',
                     'mr-1 mb-2',

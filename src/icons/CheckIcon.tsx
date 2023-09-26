@@ -1,5 +1,5 @@
+import cn from '@/utils/tw';
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 
 const CheckIcon = ({ className }: { className?: string }) => {
   return (
@@ -9,7 +9,7 @@ const CheckIcon = ({ className }: { className?: string }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={twMerge('w-3 h-3', className)}
+      className={cn('w-3 h-3', className)}
     >
       <path
         strokeLinecap="round"

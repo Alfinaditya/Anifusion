@@ -2,26 +2,19 @@
 import React from 'react';
 import { navLinks } from './navbarLinks';
 import NavLink from '@/components/NavLink';
-import { twMerge } from 'tailwind-merge';
 import Brand from '@/app/brand.svg';
 import MobileNavbar from './MobileNavbar';
 import Image from 'next/image';
 import Link from 'next/link';
+import cn from '@/utils/tw';
 
 const Navbar = () => {
   return (
     <>
       <MobileNavbar />
-      <div
-        className={twMerge(
-          'lg:flex',
-          'w-16',
-          'flex-col items-center',
-          'hidden'
-        )}
-      >
+      <div className={cn('lg:flex', 'w-16', 'flex-col items-center', 'hidden')}>
         <nav
-          className={twMerge(
+          className={cn(
             'h-full',
             'fixed z-10',
             'space-y-48',
@@ -32,7 +25,7 @@ const Navbar = () => {
           <ul>
             <Link href="/">
               <li
-                className={twMerge(
+                className={cn(
                   'p-5',
                   'border-dashed border-b border-slate-300',
                   'active:bg-light-pink'
@@ -51,7 +44,7 @@ const Navbar = () => {
               <NavLink key={crypto.randomUUID()} href={nav.path}>
                 {({ isActive }) => (
                   <li
-                    className={twMerge(
+                    className={cn(
                       'p-5',
                       isActive ? 'bg-light-pink' : '',
                       'active:bg-light-pink'

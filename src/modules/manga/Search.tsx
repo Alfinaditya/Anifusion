@@ -3,8 +3,8 @@ import React from 'react';
 import mangaStore from './mangaStore';
 import { useRouter } from 'next/navigation';
 import { Params } from './MangaPage';
-import { twMerge } from 'tailwind-merge';
 import MagnifyingGlassIcon from '@/icons/MagnifyingGlassIcon';
+import cn from '@/utils/tw';
 
 const Search: React.FC<{ params?: Params }> = ({ params }) => {
   const router = useRouter();
@@ -33,7 +33,7 @@ const Search: React.FC<{ params?: Params }> = ({ params }) => {
   }
   return (
     <div
-      className={twMerge(
+      className={cn(
         // 'lg:w-full',
         // 'w-[95%]',
         'm-auto mb-5',
@@ -44,7 +44,7 @@ const Search: React.FC<{ params?: Params }> = ({ params }) => {
         <label className="relative block">
           <span className="sr-only">Search</span>
           <span
-            className={twMerge(
+            className={cn(
               'absolute inset-y-0 left-0',
               'flex items-center',
               'pl-2'
@@ -55,7 +55,7 @@ const Search: React.FC<{ params?: Params }> = ({ params }) => {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className={twMerge(
+            className={cn(
               'placeholder:italic placeholder:text-slate-400',
               'block',
               'bg-white border border-slate-300 rounded-md',
@@ -72,7 +72,7 @@ const Search: React.FC<{ params?: Params }> = ({ params }) => {
       </div>
       <button
         onClick={handleSearch}
-        className={twMerge(
+        className={cn(
           'rounded-full',
           'bg-main text-white',
           'px-3 py-2',
