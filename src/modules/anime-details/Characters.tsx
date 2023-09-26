@@ -1,9 +1,10 @@
 'use client';
 import Loading from '@/components/Loading';
+import { apiUrl } from '@/lib/consts';
 import Characters from '@/types/characters';
+import cn from '@/utils/tw';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 const Characters = ({ id }: { id: string }) => {
   const [characters, setCharacters] = useState<Characters>();
@@ -17,7 +18,7 @@ const Characters = ({ id }: { id: string }) => {
   }
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/anime/${id}/characters`)
+    fetch(`${apiUrl}/anime/${id}/characters`)
       .then((x) => {
         if (x.ok) {
           return x.json();
@@ -32,11 +33,11 @@ const Characters = ({ id }: { id: string }) => {
   // }
   return (
     <div className="my-12">
-      <h1 className={twMerge('font-bold text-2xl', 'px-4')}>Characters</h1>
+      <h1 className={cn('font-bold text-2xl', 'px-4')}>Characters</h1>
       {characters ? (
         <>
           <div
-            className={twMerge(
+            className={cn(
               'grid place-items-center grid-cols-2',
               'mb-6 mt-8',
               'xl:grid-cols-5',
@@ -46,13 +47,7 @@ const Characters = ({ id }: { id: string }) => {
           >
             {characters.data.slice(0, displayCount).map((characterData) => (
               <div
-                className={twMerge(
-                  'w-36',
-                  'md:w-56',
-                  'lg:w-48',
-                  'sm:w-48',
-                  'mb-6'
-                )}
+                className={cn('w-36', 'md:w-56', 'lg:w-48', 'sm:w-48', 'mb-6')}
                 key={crypto.randomUUID()}
               >
                 <Image
@@ -63,13 +58,7 @@ const Characters = ({ id }: { id: string }) => {
                   alt={characterData.character.name}
                 />
                 <div className="sm:w-48 w-36">
-                  <p
-                    className={twMerge(
-                      'font-bold truncate ...',
-                      'mt-3',
-                      'w-full'
-                    )}
-                  >
+                  <p className={cn('font-bold truncate ...', 'mt-3', 'w-full')}>
                     {characterData.character.name}
                   </p>
                   <p>{characterData.role}</p>
@@ -77,10 +66,10 @@ const Characters = ({ id }: { id: string }) => {
               </div>
             ))}
           </div>
-          <div className={twMerge('block', 'w-full', 'sm:p-0', 'pr-2')}>
+          <div className={cn('block', 'w-full', 'sm:p-0', 'pr-2')}>
             {displayCount < characters.data.length ? (
               <button
-                className={twMerge(
+                className={cn(
                   'cursor-pointer',
                   'ml-auto',
                   'block',
@@ -94,7 +83,7 @@ const Characters = ({ id }: { id: string }) => {
             ) : (
               <button
                 // className="c ursor-pointer ml-auto block text-main hover:text-pink-600 underline"
-                className={twMerge(
+                className={cn(
                   'cursor-pointer',
                   'ml-auto',
                   'block',

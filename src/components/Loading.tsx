@@ -1,15 +1,15 @@
+import cn from '@/utils/tw';
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 interface Props {
   text: string;
   className?: string;
 }
 const Loading: React.FC<Props> = ({ text, className }) => {
   return (
-    <div role="status" className={twMerge('text-center m-auto', className)}>
+    <div role="status" className={cn('text-center m-auto', className)}>
       <svg
         aria-hidden="true"
-        className={twMerge(
+        className={cn(
           'inline',
           'w-8 h-8',
           'mr-2',

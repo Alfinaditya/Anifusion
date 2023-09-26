@@ -1,5 +1,5 @@
+import cn from '@/utils/tw';
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 
 const XIcon = ({ className }: { className?: string }) => {
   return (
@@ -10,7 +10,7 @@ const XIcon = ({ className }: { className?: string }) => {
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
-        className={twMerge('w-6 h-6', className)}
+        className={cn('w-6 h-6', className)}
       >
         <path
           strokeLinecap="round"

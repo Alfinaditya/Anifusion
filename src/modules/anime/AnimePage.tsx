@@ -7,7 +7,8 @@ import Search from './Search';
 import Link from 'next/link';
 import { StarIcon } from '@/icons';
 import Navbar from '../partials/Navbar';
-import { twMerge } from 'tailwind-merge';
+import { apiUrl } from '@/lib/consts';
+import cn from '@/utils/tw';
 
 export interface Params {
   status?: string;
@@ -39,8 +40,8 @@ async function getData(params?: Params) {
         `${encodeURIComponent(key)}=${encodeURIComponent(paramsValue[key])}`
     )
     .join('&');
-
-  const res = await fetch(`${process.env.API_URL}/anime?${queryString}`);
+  console.log(`${apiUrl}/anime?${queryString}`);
+  const res = await fetch(`${apiUrl}/anime?${queryString}`);
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -66,19 +67,14 @@ const AnimePage = async (props: Props) => {
       <Navbar />
       <div className="lg:w-full w-[95%] m-auto lg:mx-10 mt-12">
         <div>
-          <h1
-            className={twMerge(
-              'text-3xl text-main font-bold text-left',
-              'mb-12'
-            )}
-          >
+          <h1 className={cn('text-3xl text-main font-bold text-left', 'mb-12')}>
             Anifusion
           </h1>
           <Search params={props.searchParams} />
           <SortOptions />
         </div>
         <div
-          className={twMerge(
+          className={cn(
             'mt-8',
             'flex flex-wrap',
             'lg:justify-start justify-evenly',
@@ -89,47 +85,25 @@ const AnimePage = async (props: Props) => {
           {animeList.data.map((anime) => (
             <Link
               href={`anime/${anime.mal_id}`}
-              className={twMerge(
-                'lg:w-48',
-                'sm:w-48',
-                'md:w-56',
-                'w-36',
-                'mb-10'
-              )}
+              className={cn('lg:w-48', 'sm:w-48', 'md:w-56', 'w-36', 'mb-10')}
               key={crypto.randomUUID()}
             >
               <Image
                 width={200}
                 height={200}
                 src={anime.images.webp.image_url}
-                className={twMerge(
-                  'w-full h-60',
-                  'shadow-lg',
-                  'hover:shadow-xl'
-                )}
+                className={cn('w-full h-60', 'shadow-lg', 'hover:shadow-xl')}
                 alt={anime.title}
               />
-              <div className={twMerge('lg:w-48', 'sm:w-48', 'md:w-56', 'w-36')}>
-                <p
-                  className={twMerge(
-                    'mt-6',
-                    'font-bold truncate ...',
-                    'w-full'
-                  )}
-                >
+              <div className={cn('lg:w-48', 'sm:w-48', 'md:w-56', 'w-36')}>
+                <p className={cn('mt-6', 'font-bold truncate ...', 'w-full')}>
                   {anime.title}
                 </p>
-                <p
-                  className={twMerge(
-                    'mt-2',
-                    'font-normal truncate ...',
-                    'w-full'
-                  )}
-                >
+                <p className={cn('mt-2', 'font-normal truncate ...', 'w-full')}>
                   {anime.year}
                 </p>
                 <div
-                  className={twMerge(
+                  className={cn(
                     'mt-2',
                     'text-main font-bold',
                     'flex items-center'

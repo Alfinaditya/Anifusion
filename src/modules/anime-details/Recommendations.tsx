@@ -8,12 +8,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { ThumbUpIcon } from '@/icons';
-import { twMerge } from 'tailwind-merge';
+import { apiUrl } from '@/lib/consts';
+import cn from '@/utils/tw';
+
 const Recommendations = ({ id }: { id: string }) => {
   const [recommendations, setRecommendations] = useState<Recommendations>();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/anime/${id}/recommendations`)
+    fetch(`${apiUrl}/anime/${id}/recommendations`)
       .then((x) => {
         if (x.ok) {
           return x.json();
@@ -27,7 +29,7 @@ const Recommendations = ({ id }: { id: string }) => {
   return (
     <>
       <div className="mb-20">
-        <h1 className={twMerge('font-bold', 'text-2xl', 'px-4', 'mb-8')}>
+        <h1 className={cn('font-bold', 'text-2xl', 'px-4', 'mb-8')}>
           Recommendations
         </h1>
         {recommendations ? (
@@ -70,7 +72,7 @@ const Recommendations = ({ id }: { id: string }) => {
                         {recommendation.entry.title}
                       </p>
                       <div
-                        className={twMerge(
+                        className={cn(
                           'text-main',
                           'font-bold,',
                           'flex items-center',

@@ -5,12 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Empty from './Empty';
-import { twMerge } from 'tailwind-merge';
+import { apiUrl } from '@/lib/consts';
+import cn from '@/utils/tw';
 
 async function getData() {
-  const res = await fetch(
-    `${process.env.API_URL}/manga?status=complete&limit=16`
-  );
+  const res = await fetch(`${apiUrl}/manga?status=complete&limit=16`);
   //   console.log(res.status);
   if (!res.ok) {
     throw new Error('Failed to fetch data');
@@ -21,12 +20,9 @@ async function getData() {
 const CompletedManga = async () => {
   const completedMangaData: Mangas = await getData();
   return (
-    <div className={twMerge('mt-20 mb-32', 'lg:mb-10')}>
+    <div className={cn('mt-20 mb-32', 'lg:mb-10')}>
       <h1
-        className={twMerge(
-          'sm:ml-2 lg:text-left',
-          'font-bold text-xl text-center'
-        )}
+        className={cn('sm:ml-2 lg:text-left', 'font-bold text-xl text-center')}
       >
         <span className="text-main">Completed</span> Manga
       </h1>
@@ -35,7 +31,7 @@ const CompletedManga = async () => {
       ) : (
         <div>
           <div
-            className={twMerge(
+            className={cn(
               'mt-8',
               'flex flex-wrap',
               'lg:justify-start justify-evenly',
@@ -48,7 +44,7 @@ const CompletedManga = async () => {
                 <Link
                   href={`manga/${manga.mal_id}`}
                   key={manga.mal_id}
-                  className={twMerge(
+                  className={cn(
                     'lg:w-48',
                     'sm:w-48',
                     'md:w-56',
@@ -61,7 +57,7 @@ const CompletedManga = async () => {
                     width={400}
                     height={400}
                     src={manga.images.webp.image_url}
-                    className={twMerge(
+                    className={cn(
                       'w-full h-60',
                       'shadow-lg',
                       'hover:shadow-xl'
@@ -70,16 +66,12 @@ const CompletedManga = async () => {
                   />
                   <div className="lg:w-48 sm:w-48 md:w-56 w-36">
                     <p
-                      className={twMerge(
-                        'mt-6',
-                        'font-bold truncate ...',
-                        'w-full'
-                      )}
+                      className={cn('mt-6', 'font-bold truncate ...', 'w-full')}
                     >
                       {manga.title}
                     </p>
                     <div
-                      className={twMerge(
+                      className={cn(
                         'mt-2',
                         'text-main font-bold',
                         'flex items-center'
@@ -94,7 +86,7 @@ const CompletedManga = async () => {
           </div>
           <Link href="/manga">
             <p
-              className={twMerge(
+              className={cn(
                 'text-main font-medium text-lg underline',
                 'rounded',
                 'ml-2'

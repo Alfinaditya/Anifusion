@@ -40,12 +40,6 @@ export default function RootLayout({
           speed={200}
           shadow="0 0 10px #FFD4E5,0 0 5px #FFD4E5"
         />
-        {/* className={twMerge(
-            'mt-12 m-auto',
-            'xl:max-w-screen-2xl',
-            'lg:w-11/12',
-            'flex justify-between'
-          )} */}
         <div className="flex">{children}</div>
       </body>
     </html>

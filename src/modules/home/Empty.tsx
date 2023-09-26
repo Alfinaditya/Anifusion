@@ -1,8 +1,8 @@
+import cn from '@/utils/tw';
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 
 const Empty = ({ text }: { text: string }) => {
-  return <p className={twMerge('text-center ', 'm-auto mt-10')}>{text}</p>;
+  return <p className={cn('text-center ', 'm-auto mt-10')}>{text}</p>;
 };
 
 export default Empty;

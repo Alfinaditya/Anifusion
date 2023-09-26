@@ -1,6 +1,6 @@
 export default interface Animes {
   pagination: Pagination;
-  data: Daum[];
+  data: Anime[];
 }
 
 interface Pagination {
@@ -15,8 +15,10 @@ interface Items {
   total: number;
   per_page: number;
 }
-
-interface Daum {
+export interface AnimeDetails {
+  data: Anime;
+}
+export interface Anime {
   mal_id: number;
   url: string;
   images: Images;
@@ -24,30 +26,30 @@ interface Daum {
   approved: boolean;
   titles: Title[];
   title: string;
-  title_english?: string;
-  title_japanese?: string;
+  title_english: string;
+  title_japanese: string;
   title_synonyms: string[];
-  type?: string;
+  type: string;
   source: string;
-  episodes?: number;
+  episodes: number;
   status: string;
   airing: boolean;
   aired: Aired;
   duration: string;
-  rating?: string;
-  score: any;
-  scored_by: any;
-  rank: any;
+  rating: string;
+  score: number;
+  scored_by: number;
+  rank: number;
   popularity: number;
   members: number;
   favorites: number;
-  synopsis?: string;
+  synopsis: string;
   background: any;
-  season: any;
-  year: any;
+  season: string;
+  year: number;
   broadcast: Broadcast;
   producers: Producer[];
-  licensors: any[];
+  licensors: Licensor[];
   studios: Studio[];
   genres: Genre[];
   explicit_genres: any[];
@@ -73,18 +75,18 @@ interface Webp {
 }
 
 interface Trailer {
-  youtube_id?: string;
-  url?: string;
-  embed_url?: string;
+  youtube_id: string;
+  url: string;
+  embed_url: string;
   images: Images2;
 }
 
 interface Images2 {
-  image_url?: string;
-  small_image_url?: string;
-  medium_image_url?: string;
-  large_image_url?: string;
-  maximum_image_url?: string;
+  image_url: string;
+  small_image_url: string;
+  medium_image_url: string;
+  large_image_url: string;
+  maximum_image_url: string;
 }
 
 interface Title {
@@ -93,8 +95,8 @@ interface Title {
 }
 
 interface Aired {
-  from?: string;
-  to: any;
+  from: string;
+  to: string;
   prop: Prop;
   string: string;
 }
@@ -105,25 +107,32 @@ interface Prop {
 }
 
 interface From {
-  day?: number;
-  month?: number;
-  year?: number;
+  day: number;
+  month: number;
+  year: number;
 }
 
 interface To {
-  day: any;
-  month: any;
-  year: any;
+  day: number;
+  month: number;
+  year: number;
 }
 
 interface Broadcast {
   day: any;
   time: any;
   timezone: any;
-  string?: string;
+  string: string;
 }
 
 interface Producer {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+}
+
+interface Licensor {
   mal_id: number;
   type: string;
   name: string;

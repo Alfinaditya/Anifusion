@@ -4,8 +4,8 @@ import animeStore from './mangaStore';
 import Mangas from '@/types/mangas';
 import { Params } from './MangaPage';
 import { useRouter } from 'next/navigation';
-import { twMerge } from 'tailwind-merge';
 import { ChevronLeftIcon, ChevronRightIcon } from '@/icons';
+import cn from '@/utils/tw';
 
 const Paginate: React.FC<{ mangaList: Mangas; params?: Params }> = ({
   mangaList,
@@ -45,7 +45,7 @@ const Paginate: React.FC<{ mangaList: Mangas; params?: Params }> = ({
 
   return (
     <div
-      className={twMerge(
+      className={cn(
         'lg:mb-10',
         'mb-48',
         'flex',

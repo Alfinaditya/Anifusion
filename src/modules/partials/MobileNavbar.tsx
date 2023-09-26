@@ -1,12 +1,12 @@
 import NavLink from '@/components/NavLink';
 import React from 'react';
 import { mobileNavLinks } from './navbarLinks';
-import { twMerge } from 'tailwind-merge';
+import cn from '@/utils/tw';
 
 const MobileNavbar = () => {
   return (
     <div
-      className={twMerge(
+      className={cn(
         'lg:hidden',
         'fixed bottom-0 left-0 z-50',
         'w-full h-16',
@@ -14,7 +14,7 @@ const MobileNavbar = () => {
       )}
     >
       <div
-        className={twMerge(
+        className={cn(
           'grid',
           'h-full max-w-lg',
           'grid-cols-3',
@@ -26,7 +26,7 @@ const MobileNavbar = () => {
           <NavLink key={crypto.randomUUID()} href={nav.path}>
             {({ isActive }) => (
               <div
-                className={twMerge(
+                className={cn(
                   'w-full',
                   'inline-flex flex-col items-center justify-center',
                   'pt-2',
@@ -36,7 +36,7 @@ const MobileNavbar = () => {
               >
                 {isActive ? nav.visitedIcon : nav.unvisitedIcon}
                 <span
-                  className={twMerge(
+                  className={cn(
                     'text-sm text-white',
                     'mt-2',
                     isActive ? 'text-main' : ''
