@@ -3,11 +3,11 @@ import React from 'react';
 import { ChevronLeftIcon } from '@/icons';
 
 import Link from 'next/link';
-import Manga from '@/types/manga';
 import Characters from './Characters';
 import Recommendations from './Recommendations';
 import { apiUrl } from '@/lib/consts';
 import cn from '@/utils/tw';
+import { MangaDetails } from '@/types/mangas';
 
 async function getData(id: string) {
   const res = await fetch(`${apiUrl}/manga/${id}`);
@@ -19,7 +19,7 @@ async function getData(id: string) {
 }
 
 const MangaDetailsPage = async ({ params }: { params: { id: string } }) => {
-  const manga: Manga = await getData(params.id);
+  const manga: MangaDetails = await getData(params.id);
   return (
     <div className={cn('w-[95%]', 'm-auto mt-12')}>
       <Link className={cn('flex items-center', 'mb-6')} href="/manga">

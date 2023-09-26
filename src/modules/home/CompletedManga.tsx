@@ -1,4 +1,3 @@
-import Loading from '@/components/Loading';
 import { StarIcon } from '@/icons';
 import Mangas from '@/types/mangas';
 import Image from 'next/image';

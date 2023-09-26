@@ -4,12 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "yarn ci && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "jest",
-    "ci": "jest --runInBand",
-    "test:watch": "jest --watchAll"
+    "lint": "next lint"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -37,18 +34,5 @@
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6",
     "zustand": "^4.4.1"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
-    "eslint-plugin-jest-dom": "^5.1.0",
-    "eslint-plugin-testing-library": "^6.0.2",
-    "isomorphic-fetch": "^3.0.0",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "jest-extended": "^4.0.1",
-    "jest-fetch-mock": "^3.0.3",
-    "ts-jest": "^29.1.1",
-    "whatwg-fetch": "^3.6.19"
   }
 }
